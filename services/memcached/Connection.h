@@ -106,20 +106,21 @@ class Connection<MemcachedService> {
     auto f = p->getFuture();
 
     if (request->which() == MemcachedRequest::GET) {
-      fm_->addTask([this, request, p] () mutable {
-        client_->send("get " + request->key()+"\r\n");
+      auto req = request;
+      fm_->addTask([this, req, p] () mutable {
+        client_->send("get " + req->key()+"\r\n");
         p->setValue(MemcachedService::Reply());
       });
     } else if (request->which() == MemcachedRequest::SET) {
-      auto req = std::make_shared<McSetRequest>(request->key());
-      req->value() = folly::IOBuf(folly::IOBuf::COPY_BUFFER, request->value());
-      fm_->addTask([this, request, p] () mutable {
-        client_->send("set" + " " + request->key() + " 0 900 " + std::to_string(request->value().length()) + "\r\n"+ request->value()+"\r\n");
+      auto req = request;
+      fm_->addTask([this, req, p] () mutable {
+        client_->send("set " + req->key() + " 0 900 " + std::to_string(req->value().length()) + "\r\n"+ req->value()+"\r\n");
         p->setValue(MemcachedService::Reply());
       });
     } else {
-      fm_->addTask([this, request, p] () mutable {
-        client_->send("delete " + request->key()+"\r\n");
+      auto req = request;
+      fm_->addTask([this, req, p] () mutable {
+        client_->send("delete " + req->key()+"\r\n");
         p->setValue(MemcachedService::Reply());
       });
     }
