@@ -171,7 +171,7 @@ int run(int argc, char* argv[]) {
   scheduler.stop();
   scheduler.join();
 
-  StatisticsManager::printAll();
+  //StatisticsManager::printAll();
   if (FLAGS_output_file != "") {
     int fd = open(FLAGS_output_file.c_str(),
                   O_WRONLY | O_CREAT | O_TRUNC,

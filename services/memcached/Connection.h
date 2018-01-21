@@ -80,17 +80,21 @@ public:
           };
         std::string buf;
         char* header_ptr = reinterpret_cast<char*>(&header);
-        for (int i = 0; i < 4; ++i)
-        {
-            buf += header_ptr[i];
-        }
+        buf += header_ptr[1];
+	buf += header_ptr[0];
+	buf += header_ptr[3];
+	buf += header_ptr[2];
+	buf += header_ptr[5];
+	buf += header_ptr[4];
+	buf += header_ptr[7];
+	buf += header_ptr[6];
         buf.append(msg);
-        socket_.send_to(boost::asio::buffer(buf, buf.size()), endpoint_);
-        
+        //LOG(INFO) << "Message:" << buf << " \n";
+	socket_.send_to(boost::asio::buffer(buf, buf.size()), endpoint_); 
         size_t len = socket_.receive_from(
                 boost::asio::buffer(recv_buf), endpoint_);
         request_id++;
-        //std::cout.write(recv_buf.data(), len);
+        //LOG(INFO) << "Received: " <<recv_buf.data() <<"\n";
     }
 
 private:
@@ -123,7 +127,7 @@ class Connection<MemcachedService> {
 
   folly::Future<MemcachedService::Reply>
   sendRequest(std::unique_ptr<typename MemcachedService::Request> request) {
-
+    //LOG(INFO) << "enter sendRequest\n";
     folly::MoveWrapper<folly::Promise<MemcachedService::Reply> > p;
     auto f = p->getFuture();
 
