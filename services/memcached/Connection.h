@@ -79,7 +79,7 @@ public:
             0
           };
         std::string buf;
-        char* header_ptr = reinterpret_cast<char*>(header);
+        char* header_ptr = reinterpret_cast<char*>(&header);
         for (int i = 0; i < 4; ++i)
         {
             buf += header_ptr[i];
