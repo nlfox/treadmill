@@ -68,7 +68,7 @@ public:
         socket_.send_to(boost::asio::buffer(msg, msg.size()), endpoint_);
         
         size_t len = socket_.receive_from(
-                boost::asio::buffer(recv_buf), sender_endpoint);
+                boost::asio::buffer(recv_buf), endpoint_);
         //std::cout.write(recv_buf.data(), len);
     }
 
