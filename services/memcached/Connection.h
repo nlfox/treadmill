@@ -90,7 +90,7 @@ class Connection<MemcachedService> {
 
     
     io_service_ = std::make_unique<boost::asio::io_service>();
-    client_ = std::make_unique<UDPClient>(io_service_, host, FLAGS_port);
+    client_ = std::make_unique<UDPClient>(io_service_, host,  std::to_string(FLAGS_port));
 
     auto loopController = std::make_unique<EventBaseLoopController>();
     loopController->attachEventBase(event_base);
