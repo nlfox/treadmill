@@ -127,7 +127,7 @@ class Connection<MemcachedService> {
   }
 
  private:
-  std::unique_ptr<AsyncMcClient> client_;
+  std::unique_ptr<UDPClient> client_;
   std::unique_ptr<boost::asio::io_service> io_service_;
   std::unique_ptr<FiberManager> fm_;
 };
