@@ -106,21 +106,22 @@ class Connection<MemcachedService> {
     auto f = p->getFuture();
 
     if (request->which() == MemcachedRequest::GET) {
-      auto req = request;
-      fm_->addTask([this, req, p] () mutable {
-        client_->send("get " + req->key()+"\r\n");
+      auto key = request->key();
+      fm_->addTask([this, key, p] () mutable {
+        client_->send("get " + key +"\r\n");
         p->setValue(MemcachedService::Reply());
       });
     } else if (request->which() == MemcachedRequest::SET) {
-      auto req = request;
-      fm_->addTask([this, req, p] () mutable {
-        client_->send("set " + req->key() + " 0 900 " + std::to_string(req->value().length()) + "\r\n"+ req->value()+"\r\n");
+      auto key = request->key();
+      auto value = request->value();
+      fm_->addTask([this, key, value , p] () mutable {
+        client_->send("set " + key + " 0 900 " + std::to_string(value.length()) + "\r\n"+ value+"\r\n");
         p->setValue(MemcachedService::Reply());
       });
     } else {
-      auto req = request;
-      fm_->addTask([this, req, p] () mutable {
-        client_->send("delete " + req->key()+"\r\n");
+      auto key = request->key();
+      fm_->addTask([this, key, p] () mutable {
+        client_->send("delete " + key +"\r\n");
         p->setValue(MemcachedService::Reply());
       });
     }
