@@ -85,7 +85,7 @@ public:
             buf += header_ptr[i];
         }
         buf.append(msg);
-        socket_.send_to(boost::asio::buffer(msg, msg.size()), endpoint_);
+        socket_.send_to(boost::asio::buffer(buf, buf.size()), endpoint_);
         
         size_t len = socket_.receive_from(
                 boost::asio::buffer(recv_buf), endpoint_);
