@@ -45,6 +45,13 @@ namespace facebook {
 namespace windtunnel {
 namespace treadmill {
 
+struct udp_header
+{
+    uint16_t request_id;
+    uint16_t seq_num;
+    uint16_t datagram_num;
+    uint16_t reserved;
+};
 
 
 class UDPClient {
@@ -65,16 +72,31 @@ public:
     }
 
     void send(const std::string &msg) {
+        udp_header header = {
+            request_id,
+            0,
+            1,
+            0
+          }
+        std::string buf;
+        char* header_ptr = reinterpret_cast<char*>(header);
+        for (int i = 0; i < 4; ++i)
+        {
+            buf += header_ptr[i];
+        }
+        buf.append(msg);
         socket_.send_to(boost::asio::buffer(msg, msg.size()), endpoint_);
         
         size_t len = socket_.receive_from(
                 boost::asio::buffer(recv_buf), endpoint_);
+        request_id++;
         //std::cout.write(recv_buf.data(), len);
     }
 
 private:
     boost::asio::io_service &io_service_;
     udp::socket socket_;
+    uint16_t request_id = 0 ;
     boost::array<char, 1024> recv_buf;
     udp::endpoint endpoint_;
 };
