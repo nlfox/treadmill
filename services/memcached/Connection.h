@@ -77,7 +77,7 @@ public:
             0,
             1,
             0
-          }
+          };
         std::string buf;
         char* header_ptr = reinterpret_cast<char*>(header);
         for (int i = 0; i < 4; ++i)
