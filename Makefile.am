@@ -35,6 +35,7 @@ libtreadmill_a_SOURCES = \
 	Util.cpp
 
 bin_PROGRAMS = \
+	treadmill_memcached_udp \
 	treadmill_memcached \
 	treadmill_sleep
 
