@@ -50,6 +50,16 @@ treadmill_memcached_SOURCES = \
 treadmill_memcached_LDADD = \
 	libtreadmill.a
 
+treadmill_memcached_udp_SOURCES = \
+	services/memcached_udp/Connection.h \
+	services/memcached_udp/MemcachedService.h \
+	services/memcached_udp/Request.h \
+	services/memcached_udp/Treadmill.cpp \
+	services/memcached_udp/Workload.h
+
+treadmill_memcached_udp_LDADD = \
+	libtreadmill.a
+
 treadmill_sleep_SOURCES = \
 	services/sleep/Treadmill.cpp \
 	services/sleep/gen-cpp2/sleep_constants.cpp \
