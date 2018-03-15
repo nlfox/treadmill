@@ -253,6 +253,7 @@ class Connection<MemcachedService> {
     ConnectionOptions opts(host, FLAGS_port, mc_ascii_protocol);
 
     client_ = std::make_unique<UDPClient>( "192.168.23.2",  2333);
+    LOG(INFO) << "enter sendRequest\n";
 
     auto loopController = std::make_unique<EventBaseLoopController>();
     loopController->attachEventBase(event_base);
