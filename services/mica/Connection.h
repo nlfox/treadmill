@@ -253,7 +253,6 @@ private:
     int dest_port;
     char *dest_host;
 };
-};
 
 
 
