@@ -88,6 +88,7 @@ public:
         }
         struct sockaddr_in addr, srcaddr;
 
+        static int instance_id = 0; 
         // dest port
         memset((char *) &si_other, 0, sizeof(si_other));
         si_other.sin_family = AF_INET;
@@ -102,8 +103,10 @@ public:
         srcaddr.sin_addr.s_addr = htonl(INADDR_ANY);
         port_base = 6655;
         send_port = port_base + instance_id;
+        instance_id ++;
+
         srcaddr.sin_port = htons(send_port);
-        printf("sent port set to %d \n", send_port);
+        LOG(INFO) << "sent port set to " << send_port << "\n";
         instance_id += 1;
 
 
@@ -247,7 +250,6 @@ private:
     int s, rs;
     struct sockaddr_in si_other;
     int slen = sizeof(si_other);
-    int instance_id;
     int port_base;
     int send_port;
     int dest_port;
