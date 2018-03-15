@@ -181,7 +181,7 @@ public:
         std::vector<char> buffer(
                 sizeof(RequestBatchHeader) + sizeof(RequestHeader) + ::mica::util::roundup<8>(key_length) +
                 ::mica::util::roundup<8>(value_length));
-
+        
         std::vector<char> recv_buffer(1024);
         auto p = buffer.data();
 
@@ -200,7 +200,7 @@ public:
         if (sendto(s, buffer.data(), buffer.size(), 0, (struct sockaddr *) &si_other, slen) == -1) {
             printf("sendto() fail");
         }
-
+        LOG(INFO) << "sent packet\n";
         //printf("sent packet\n");
         while (1) {
             int numbytes = static_cast<int>(recvfrom(rs, recv_buffer.data(), recv_buffer.size(), 0, (struct sockaddr *) &si_other,
