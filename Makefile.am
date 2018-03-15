@@ -38,7 +38,7 @@ bin_PROGRAMS = \
 	treadmill_memcached_udp \
 	treadmill_memcached \
 	treadmill_sleep \
-	treadmill_mica \
+	treadmill_mica 
 
 # Ignore treadmill_libmcrouter for now
 
