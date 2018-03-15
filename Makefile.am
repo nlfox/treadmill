@@ -37,7 +37,8 @@ libtreadmill_a_SOURCES = \
 bin_PROGRAMS = \
 	treadmill_memcached_udp \
 	treadmill_memcached \
-	treadmill_sleep
+	treadmill_sleep \
+	treadmill_mica \
 
 # Ignore treadmill_libmcrouter for now
 
@@ -57,6 +58,19 @@ treadmill_memcached_udp_SOURCES = \
 	services/memcached_udp/Request.h \
 	services/memcached_udp/Treadmill.cpp \
 	services/memcached_udp/Workload.h
+
+treadmill_mica_SOURCES = \
+	services/mica/Connection.h \
+	services/mica/MemcachedService.h \
+	services/mica/Request.h \
+	services/mica/Treadmill.cpp \
+	services/mica/cityhash.h \
+	services/mica/roundup.h \
+	services/mica/utils.h \
+	services/mica/memcpy.h \
+	services/mica/zipf.h \
+	services/mica/Workload.h
+	
 
 treadmill_memcached_udp_LDADD = \
 	libtreadmill.a
