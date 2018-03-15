@@ -93,6 +93,8 @@ public:
         si_other.sin_family = AF_INET;
         si_other.sin_port = htons(port);
 
+        dest_port = port;
+        dest_host = const_cast<char *>(host);
 
         // bind
         memset(&srcaddr, 0, sizeof(srcaddr));
@@ -107,12 +109,6 @@ public:
 
         if (bind(s, (struct sockaddr *) &srcaddr, sizeof(srcaddr)) < 0) {
             perror("bind");
-            exit(1);
-        }
-
-
-        if (inet_aton(host, &si_other.sin_addr) == 0) {
-            fprintf(stderr, "inet_aton() failed\n");
             exit(1);
         }
 
@@ -199,6 +195,15 @@ public:
         p += ::mica::util::roundup<8>(value_length);
 
 
+        memset((char *) &si_other, 0, sizeof(si_other));
+        si_other.sin_family = AF_INET;
+        si_other.sin_port = htons(dest_port);
+        if (inet_aton(dest_host, &si_other.sin_addr) == 0) {
+            fprintf(stderr, "inet_aton() failed\n");
+            exit(1);
+        }
+
+
         if (sendto(s, buffer.data(), buffer.size(), 0, (struct sockaddr *) &si_other, slen) == -1) {
             printf("sendto() fail");
         }
@@ -245,6 +250,9 @@ private:
     int instance_id;
     int port_base;
     int send_port;
+    int dest_port;
+    char *dest_host;
+};
 };
 
 
