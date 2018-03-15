@@ -59,6 +59,10 @@ treadmill_memcached_udp_SOURCES = \
 	services/memcached_udp/Treadmill.cpp \
 	services/memcached_udp/Workload.h
 
+treadmill_memcached_udp_LDADD = \
+	libtreadmill.a
+	
+
 treadmill_mica_SOURCES = \
 	services/mica/Connection.h \
 	services/mica/MemcachedService.h \
@@ -75,8 +79,7 @@ treadmill_mica_LDADD = \
 	libtreadmill.a
 	
 
-treadmill_memcached_udp_LDADD = \
-	libtreadmill.a
+
 
 treadmill_sleep_SOURCES = \
 	services/sleep/Treadmill.cpp \
