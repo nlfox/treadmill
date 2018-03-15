@@ -202,7 +202,7 @@ public:
         if (sendto(s, buffer.data(), buffer.size(), 0, (struct sockaddr *) &si_other, slen) == -1) {
             printf("sendto() fail");
         }
-        LOG(INFO) << "sent packet type: " << type << " \n" ;
+        LOG(INFO) << "sent packet type: " << type << " key:" << key_s << " value: " << value_s << "\n" ;
         //printf("sent packet\n");
         bool flag = true;
         while (flag) {
