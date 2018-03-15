@@ -17,6 +17,7 @@ int main(int argc, char* argv[]) {
   // Init treadmill
   facebook::windtunnel::treadmill::init(argc, argv);
   // Start treadmill
+  LOG(INFO) << "START MICA; \n";
   return facebook::windtunnel::treadmill::run<
     facebook::windtunnel::treadmill::MemcachedService>(argc, argv);
 }
