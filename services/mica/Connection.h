@@ -106,7 +106,7 @@ public:
         instance_id ++;
 
         srcaddr.sin_port = htons(send_port);
-        LOG(INFO) << "sent port set to " << send_port << "\n";
+        //LOG(INFO) << "sent port set to " << send_port << "\n";
         instance_id += 1;
 
 
@@ -210,7 +210,7 @@ public:
         if (sendto(s, buffer.data(), buffer.size(), 0, (struct sockaddr *) &si_other, slen) == -1) {
             printf("sendto() fail");
         }
-        LOG(INFO) << "sent packet type: " << type << " key:" << key_s << " value: " << value_s << "\n" ;
+        //LOG(INFO) << "sent packet type: " << type << " key:" << key_s << " value: " << value_s << "\n" ;
         //printf("sent packet\n");
         bool flag = true;
         while (flag) {
@@ -218,7 +218,7 @@ public:
                                                      (socklen_t *) (&slen)));
             struct udphdr *udph = (struct udphdr *) (recv_buffer.data() + sizeof(struct iphdr) +
                                                      sizeof(struct ether_header));
-            LOG(INFO) << "get packet " << htons(udph->dest) << " .\n";
+            //LOG(INFO) << "get packet " << htons(udph->dest) << " .\n";
             if (htons(udph->dest) == send_port) {
                 flag = false;
             }
