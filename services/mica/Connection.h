@@ -46,6 +46,10 @@
 #include "memcpy.h"
 #include "utils.h"
 
+#define BUFLEN 1024
+
+#define ETHER_TYPE  0x0800
+
 
 DECLARE_string(hostname);
 DECLARE_int32(port);
@@ -78,8 +82,6 @@ class UDPClient {
 public:
     UDPClient(const char *host, int port) {
         int i;
-        char buf[BUFLEN];
-        char message[BUFLEN];
 
         if ((s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1) {
             printf("socket error");
@@ -250,7 +252,7 @@ class Connection<MemcachedService> {
  public:
   explicit Connection<MemcachedService>(folly::EventBase& event_base) {
     //std::string host = nsLookUp(FLAGS_hostname);
-    ConnectionOptions opts(host, FLAGS_port, mc_ascii_protocol);
+    //ConnectionOptions opts(host, FLAGS_port, mc_ascii_protocol);
 
     client_ = std::make_unique<UDPClient>( "192.168.23.2",  2333);
     LOG(INFO) << "enter sendRequest\n";
