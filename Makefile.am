@@ -70,6 +70,9 @@ treadmill_mica_SOURCES = \
 	services/mica/memcpy.h \
 	services/mica/zipf.h \
 	services/mica/Workload.h
+
+treadmill_mica_LDADD = \
+	libtreadmill.a
 	
 
 treadmill_memcached_udp_LDADD = \
