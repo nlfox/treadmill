@@ -204,13 +204,15 @@ public:
         }
         LOG(INFO) << "sent packet\n";
         //printf("sent packet\n");
-        while (1) {
+        bool flag = true;
+        while (flag) {
             int numbytes = static_cast<int>(recvfrom(rs, recv_buffer.data(), recv_buffer.size(), 0, (struct sockaddr *) &si_other,
                                                      (socklen_t *) (&slen)));
             struct udphdr *udph = (struct udphdr *) (recv_buffer.data() + sizeof(struct iphdr) +
                                                      sizeof(struct ether_header));
+            LOG(INFO) << "get packet " << htons(udph->dest) << " .\n";
             if (htons(udph->dest) == send_port) {
-                break;
+                flag = false;
             }
         }
 
@@ -255,7 +257,7 @@ class Connection<MemcachedService> {
     //ConnectionOptions opts(host, FLAGS_port, mc_ascii_protocol);
 
     client_ = std::make_unique<UDPClient>( "192.168.23.2",  2333);
-    LOG(INFO) << "enter sendRequest\n";
+    //LOG(INFO) << "enter sendRequest\n";
 
     auto loopController = std::make_unique<EventBaseLoopController>();
     loopController->attachEventBase(event_base);
