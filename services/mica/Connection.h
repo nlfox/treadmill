@@ -249,10 +249,10 @@ template <>
 class Connection<MemcachedService> {
  public:
   explicit Connection<MemcachedService>(folly::EventBase& event_base) {
-    std::string host = nsLookUp(FLAGS_hostname);
+    //std::string host = nsLookUp(FLAGS_hostname);
     ConnectionOptions opts(host, FLAGS_port, mc_ascii_protocol);
 
-    client_ = std::make_unique<UDPClient>( host,  std::to_string(FLAGS_port));
+    client_ = std::make_unique<UDPClient>( "192.168.23.2",  2333);
 
     auto loopController = std::make_unique<EventBaseLoopController>();
     loopController->attachEventBase(event_base);
