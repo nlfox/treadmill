@@ -127,7 +127,7 @@ class Connection<MemcachedService> {
 
   folly::Future<MemcachedService::Reply>
   sendRequest(std::unique_ptr<typename MemcachedService::Request> request) {
-    //LOG(INFO) << "enter sendRequest\n";
+    LOG(INFO) << "enter sendRequest\n";
     folly::MoveWrapper<folly::Promise<MemcachedService::Reply> > p;
     auto f = p->getFuture();
 
