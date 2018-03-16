@@ -8,7 +8,7 @@
  *
  */
 
-#include "treadmill/services/memcached/Connection.h"
+#include "treadmill/services/memcached_udp/Connection.h"
 #include "treadmill/services/memcached/Workload.h"
 
 #include "treadmill/Treadmill.h"
