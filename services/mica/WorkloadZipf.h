@@ -62,18 +62,18 @@ class Workload<MemcachedService> {
       request->setValue(std::to_string(index_));
 
       if (index_ == FLAGS_number_of_keys - 1) {
-        LOG(INFO) << "WARMUP complete";
+        //LOG(INFO) << "WARMUP complete";
         state_ = State::GET;
       }
     } else if (state_ == State::GET) {
       if (get_set == 30){
           request = std::make_unique<MemcachedRequest>(MemcachedRequest::SET,
                                                      std::move(key));
-          LOG(INFO) << "set " << key;
+          //LOG(INFO) << "set " << key;
           request->setValue(key);
           get_set = 0;
       } else {
-          LOG(INFO) << "get " << key ;
+          //LOG(INFO) << "get " << key ;
           request = std::make_unique<MemcachedRequest>(MemcachedRequest::GET, std::move(key));
           get_set++;
       }
