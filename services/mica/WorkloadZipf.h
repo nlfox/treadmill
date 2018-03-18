@@ -37,7 +37,7 @@ class Workload<MemcachedService> {
     {
       state_ = State::WARMUP;
       index_ = 0;
-      zg = ZipfGen(FLAGS_number_of_keys, 0.99, static_cast<uint64_t>(1));
+      zg = ZipfGen(static_cast<uint64_t>(FLAGS_number_of_keys), 0.99, static_cast<uint64_t>(1));
       get_set = 0;
     }
 
