@@ -34,11 +34,12 @@ class Workload<MemcachedService> {
   };
 
   Workload<MemcachedService>(folly::dynamic config)
-    : state_(State::WARMUP),
-      index_(0) {
-        zg = ZipfGen(FLAGS_number_of_keys, 0.99, static_cast<uint64_t>(1));
-        get_set = 0;
-       }
+    {
+      state_ = State::WARMUP;
+      index_ = 0;
+      zg = ZipfGen(FLAGS_number_of_keys, 0.99, static_cast<uint64_t>(1));
+      get_set = 0;
+    }
 
   std::tuple<std::unique_ptr<MemcachedService::Request>,
              Promise<MemcachedService::Reply>,
