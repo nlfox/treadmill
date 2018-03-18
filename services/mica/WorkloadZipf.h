@@ -53,7 +53,7 @@ class Workload<MemcachedService> {
       key = std::to_string(index_);
     }
     else {
-      key = std::to_string(zg.next());
+      key = std::to_string(zg->next());
     }
     std::unique_ptr<MemcachedService::Request> request;
     if (state_ == State::WARMUP) {
@@ -91,7 +91,7 @@ class Workload<MemcachedService> {
 
  private:
 
-  ZipfGen zg;
+  ZipfGen* zg;
   
   State state_;
   int index_;
