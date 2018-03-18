@@ -47,11 +47,12 @@ class Workload<MemcachedService> {
     if (index_ == FLAGS_number_of_keys) {
       index_ = 0;
     }
+    std::string key;
     if (state_ == State::WARMUP) {
-      std::string key = std::to_string(index_);
+      key = std::to_string(index_);
     }
     else {
-      std::string key = std::to_string(zg.next());
+      key = std::to_string(zg.next());
     }
     std::unique_ptr<MemcachedService::Request> request;
     if (state_ == State::WARMUP) {
