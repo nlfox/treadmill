@@ -9,7 +9,7 @@
  */
 
 #include "treadmill/services/memcached_udp/Connection.h"
-#include "treadmill/services/memcached/Workload.h"
+#include "treadmill/services/mica/WorkloadZipf.h"
 
 #include "treadmill/Treadmill.h"
 
