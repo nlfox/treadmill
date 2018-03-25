@@ -60,7 +60,7 @@ class Workload<MemcachedService> {
       request = std::make_unique<MemcachedRequest>(MemcachedRequest::SET,
                                                      std::move(key));
       std::string i = std::to_string(index_);
-      std::string k = std::string( 4-i.length(), '0').append(i);
+      std::string k = std::string(10 ,std::string( 4-i.length(), '0').append(i));
       request->setValue(k);
       
       LOG(INFO) << "set " << k;
