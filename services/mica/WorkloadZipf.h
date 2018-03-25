@@ -59,7 +59,7 @@ class Workload<MemcachedService> {
     if (state_ == State::WARMUP) {
       request = std::make_unique<MemcachedRequest>(MemcachedRequest::SET,
                                                      std::move(key));
-      std:: string& i = std::to_string(index_);
+      std:: string i = std::to_string(index_);
       std::string( 4-i.length(), '0').append(i);
       request->setValue(i);
       
