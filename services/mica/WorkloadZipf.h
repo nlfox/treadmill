@@ -61,10 +61,12 @@ class Workload<MemcachedService> {
                                                      std::move(key));
       std::string i = std::to_string(index_);
       std::string k = std::string( 4-i.length(), '0').append(i);
-      std::string kr = std::string(10 , k);
-      request->setValue(kr);
-      
-      LOG(INFO) << "set " << kr;
+      std::ostringstream os;
+        for(int i = 0; i < 10; i++)
+            os << k;
+
+      request->setValue(os.str());
+      LOG(INFO) << "set " << os.str();
       
       if (index_ == FLAGS_number_of_keys - 1) {
         //LOG(INFO) << "WARMUP complete";
