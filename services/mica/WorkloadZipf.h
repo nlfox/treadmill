@@ -62,7 +62,7 @@ class Workload<MemcachedService> {
       std::string i = std::to_string(index_);
       std::string k = std::string( 4-i.length(), '0').append(i);
       std::ostringstream os;
-        for(int i = 0; i < 512; i++)
+        for(int i = 0; i < 128; i++)
             os << k;
 
       request->setValue(os.str());
